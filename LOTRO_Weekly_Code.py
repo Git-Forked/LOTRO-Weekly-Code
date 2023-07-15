@@ -10,7 +10,7 @@ r = http.request('GET', 'https://forums.lotro.com/index.php?forums/sales-and-pro
 def str_between(string, start, end):
     return (string.split(start))[1].split(end)[0]
 
-result = str_between(str(r.data), 'data-preview-url="', '">LOTRO Sales:')
+result = str_between(str(r.data), 'data-preview-url="', '">')
 
 r = http.request('GET', 'https://forums.lotro.com' + result)
 
