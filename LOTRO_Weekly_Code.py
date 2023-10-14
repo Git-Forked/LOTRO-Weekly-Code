@@ -5,7 +5,7 @@ import urllib3
 urllib3.disable_warnings()
 urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'
 http = urllib3.PoolManager(cert_reqs='CERT_NONE')
-r = http.request('GET', 'https://forums.lotro.com/index.php?forums/sales-and-promotions.8/&last_days=7')
+r = http.request('GET', 'https://forums.lotro.com/index.php?forums/sales-and-promotions.8/&last_days=7&order=last_post_date&direction=dec')
 
 def str_between(string, start, end):
     return (string.split(start))[1].split(end)[0]
