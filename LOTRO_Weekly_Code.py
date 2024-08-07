@@ -6,14 +6,30 @@ urllib3.disable_warnings()
 urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'
 http = urllib3.PoolManager(cert_reqs='CERT_NONE')
 
-r = http.request('GET', 'https://forums.lotro.com/index.php?forums/sales-and-promotions.8/index.rss')
+r = http.request('GET', 'https://forums.lotro.com/index.php?forums/sales-and-promotions.8/&last_days=7&order=last_post_date&direction=dec')
 
-def str_between(string, start, end):
-    return (string.split(start))[1].split(end)[0]
+def str_between(string, start, end, occurrence):
+    return (string.split(start))[occurrence].split(end)[0]
+
+i = 1
+url = ''
+coupon_code = ''
 
 try:
-    result = str_between(str(r.data), 'Coupon Code: ', '<br />')
+    while True:
+        url = str_between(str(r.data), 'data-preview-url="', '">', i)
+        if "sales" not in url:
+            i+=1
+        else:
+            break
 except:
-    print("ERROR: Unable to retrieve Coupon Code.")
+    print("ERROR: Unable to retrieve URL.")
 
-print(result)
+r = http.request('GET', 'https://forums.lotro.com' + url)
+
+try:
+    coupon_code = str_between(str(r.data), 'Coupon Code: ', '<br />', 1)
+except:
+    print("ERROR: Unable to retrieve coupon code.")
+
+print(coupon_code)
