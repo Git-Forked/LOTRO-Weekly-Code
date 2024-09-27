@@ -1,6 +1,7 @@
 # Retrieve LOTRO Weekly Coupon Code
 
 import urllib3
+import pyclip
 
 urllib3.disable_warnings()
 urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'
@@ -32,4 +33,6 @@ try:
 except:
     print("ERROR: Unable to retrieve coupon code.")
 
+# Print to terminal and copy to clipboard for easy pasting
 print(coupon_code)
+pyclip.copy(coupon_code)
