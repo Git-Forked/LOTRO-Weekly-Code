@@ -31,7 +31,8 @@ r = http.request('GET', 'https://forums.lotro.com' + url)
 try:
     coupon_code = str_between(str(r.data), 'Coupon Code: ', '<br />', 1)
 except:
-    print("ERROR: Unable to retrieve coupon code.")
+    coupon_code = 'ERROR: Unable to retrieve coupon code.'
+    print('ERROR: Unable to retrieve coupon code.')
 
 # Print to terminal and copy to clipboard for easy pasting
 print(coupon_code)
