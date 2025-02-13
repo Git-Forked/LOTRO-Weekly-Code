@@ -4,7 +4,7 @@ import urllib3
 import pyclip
 
 urllib3.disable_warnings()
-urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'
+#urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'     # Latest version of urllib3 no longer supports
 http = urllib3.PoolManager(cert_reqs='CERT_NONE')
 
 r = http.request('GET', 'https://forums.lotro.com/index.php?forums/sales-and-promotions.8/&last_days=7&order=post_date&direction=desc')
